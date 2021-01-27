@@ -1,7 +1,11 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
+import Contact from 'App/Models/Contact'
+
 export default class ContactsController {
-  public async index ({}: HttpContextContract) {
+  public async index ({view}: HttpContextContract) {
+    const contacts = await Contact.all()
+    return view.render('contacts/index', {contacts})
   }
 
   public async create ({}: HttpContextContract) {
