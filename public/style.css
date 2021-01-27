@@ -3,6 +3,10 @@
   padding-bottom: 3rem;
 }
 
+.main-header {
+    margin-bottom: 3rem;
+}
+
 .main-footer {
   margin-top: 3rem;
 }
@@ -10,4 +14,8 @@
 .section {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.required-field {
+    color: red;
 }

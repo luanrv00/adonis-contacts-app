@@ -8,11 +8,11 @@ export default class Contacts extends BaseSchema {
       table.increments('id')
       table.timestamps(true)
       table.string('photo').nullable()
-      table.string('firstName')
-      table.string('lastName')
+      table.string('first_name')
+      table.string('last_name')
       table.string('phone').nullable()
       table.string('email')
-      table.integer('addressId').references('id').inTable('addresses')
+      table.integer('address_id').references('id').inTable('addresses')
     })
   }
 

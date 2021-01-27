@@ -12,7 +12,7 @@ export default class Addresses extends BaseSchema {
       table.string('city').nullable()
       table.string('street').nullable()
       table.string('number').nullable()
-      table.string('additionalInfo').nullable()
+      table.string('additional_info').nullable()
     })
   }
 

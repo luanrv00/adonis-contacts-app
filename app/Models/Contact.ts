@@ -31,6 +31,9 @@ export default class Contact extends BaseModel {
   @column()
   public photo: string
 
+  @column()
+  public addressId: integer
+
   @belongsTo(() => Address)
   public address: BelongsTo<typeof Address>
 }

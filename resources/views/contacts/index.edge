@@ -4,5 +4,14 @@
 <section class="section">
     <p>Nenhum contato foi adicionado ainda.</p>
 </section>
+<div>
+  <a class="ui positive button" href="{{route('contacts.create')}}">
+    Adicionar um contato
+  </a>
+</div>
+@else
+@each(contact in contacts)
+{{contact.firstName}} {{contact.lastName}}
+@endeach
 @endif
 @endsection
