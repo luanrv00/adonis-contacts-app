@@ -10,8 +10,48 @@
   </a>
 </div>
 @else
-@each(contact in contacts)
-{{contact.firstName}} {{contact.lastName}}
-@endeach
+<section class="section">
+  <table class="ui table">
+      <thead>
+          <tr>
+              <th>&nbsp;</th>
+              <th>Nome completo</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>País</th>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>Av./Rua</th>
+              <th>Nº</th>
+          </tr>
+      </thead>
+      <tbody>
+        @each (contact in contacts)
+        <tr>
+          <td class="table-column">
+            <figure class="image is-64x64">
+              @if (contact.photo)
+              <img class="ui tiny avatar image" src="{{contact.photo}}">
+              @endif
+            </figure>
+          </td>
+          <td class="table-column">{{contact.firstName}} {{contact.lastName}}</td>
+          <td class="table-column">{{contact.email}}</td>
+          <td class="table-column">{{contact.phone}}</td>
+          <td class="table-column">{{contact.address.country}}</td>
+          <td class="table-column">{{contact.address.state}}</td>
+          <td class="table-column">{{contact.address.city}}</td>
+          <td class="table-column">{{contact.address.street}}</td>
+          <td class="table-column">{{contact.address.number}}</td>
+        </tr>
+        @endeach
+      </tbody>
+  </table>
+</section>
+<div>
+  <a class="ui positive button" href="{{route('contacts.create')}}">
+    Adicionar um contato
+  </a>
+</div>
 @endif
 @endsection
