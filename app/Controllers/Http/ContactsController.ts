@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
+import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
 import Contact from 'App/Models/Contact'
 import Address from 'App/Models/Address'
@@ -15,6 +16,14 @@ export default class ContactsController {
   }
 
   public async store ({request, response}: HttpContextContract) {
+    await request.validate({
+      schema: schema.create({
+        first_name: schema.string(),
+        last_name: schema.string(),
+        email: schema.string({}, [rules.email()]),
+      })
+    })
+
     let contactData = request.only(
       ['first_name', 'last_name', 'email', 'phone']
     )

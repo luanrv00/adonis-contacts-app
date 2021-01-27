@@ -1,25 +1,27 @@
 @layout("layouts/base")
 @section("content")
+@include("layouts/error-flash-message")
+
 <form class="ui form" method="post" action="{{route('contacts.store')}}" enctype="multipart/form-data">
   {{csrfField()}}
   <div class="two fields">
       <div class="field">
         <label>Nome <span class="required-field">*</span></label>
-        <input name="first_name">
+        <input name="first_name" value="{{flashMessages.get('first_name') || ''}}">
       </div>
       <div class="field">
         <label>Sobrenome <span class="required-field">*</span></label>
-        <input name="last_name">
+        <input name="last_name" value="{{flashMessages.get('last_name') || ''}}">
       </div>
   </div>
   <div class="two fields">
     <div class="field">
       <label>E-mail <span class="required-field">*</span></label>
-      <input type="email" name="email">
+      <input type="email" name="email" value="{{flashMessages.get('email') || ''}}">
     </div>
     <div class="field">
       <label>Telefone</label>
-      <input name="phone">
+      <input name="phone" value="{{{flashMessages.get('phone') || ''}}}">
     </div>
   </div>
 
@@ -35,7 +37,7 @@
   <div class="three fields">
     <div class="field">
       <label>País</label>
-      <input name="country">
+      <input name="country" value="{{flashMessages.get('country') || ''}}">
     </div>
     <div class="field">
       <label>Estado</label>
@@ -43,22 +45,24 @@
     </div>
     <div class="field">
       <label>Cidade</label>
-      <input name="city">
+      <input name="city" value="{{flashMessages.get('city') || ''}}">
     </div>
   </div>
   <div class="two fields">
     <div class="field">
       <label>Avenida/Rua</label>
-      <input name="street">
+      <input name="street" value="{{flashMessages.get('street') || ''}}">
     </div>
     <div class="field">
       <label>Nº</label>
-      <input name="number">
+      <input name="number" value="{{flashMessages.get('number') || ''}}">
     </div>
   </div>
   <div class="field">
     <label>Complemento</label>
-    <textarea class="textarea" name="additional_info"></textarea>
+    <textarea class="textarea" name="additional_info">
+      {{flashMessages.get('additional_info') || ''}}
+    </textarea>
   </div>
 
   <hr class="ui divider">
