@@ -1,5 +1,6 @@
 {
   "baseUrl": "http://localhost:3333",
   "video": false,
-  "integrationFolder": "test/functional"
+  "integrationFolder": "test/functional",
+  "screenshotOnRunFailure": false
 }
