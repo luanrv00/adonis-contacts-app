@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+yarn install
+yarn cypress run
+exit 1

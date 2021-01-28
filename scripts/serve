@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+yarn install
+cp .env.example .env
+mkdir tmp
+node ace migration:run
+node ace serve --watch
+exit 1
