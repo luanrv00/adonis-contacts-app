@@ -16,13 +16,7 @@ export default class ContactsController {
   }
 
   public async store ({request, response}: HttpContextContract) {
-    await request.validate({
-      schema: schema.create({
-        first_name: schema.string(),
-        last_name: schema.string(),
-        email: schema.string({}, [rules.email()]),
-      })
-    })
+    await this.validateRequest(request)
 
     let contactData = request.only(
       ['first_name', 'last_name', 'email', 'phone']
@@ -55,12 +49,48 @@ export default class ContactsController {
   public async show ({}: HttpContextContract) {
   }
 
-  public async edit ({}: HttpContextContract) {
+  public async edit ({params, view}: HttpContextContract) {
+    const contact = await Contact.query().where('id', params.id).preload('address')
+    return view.render('contacts/edit', {contact: contact[0]})
   }
 
-  public async update ({}: HttpContextContract) {
+  public async update ({params, request, response}: HttpContextContract) {
+    await this.validateRequest(request)
+
+    const contactData = request.only(['first_name', 'last_name', 'email', 'phone'])
+    const contactPhoto = request.file('photo',
+      {size: '1mb', extnames: ['jpg', 'jpeg', 'png', 'gif']} // upload validations
+    )
+
+    if (contactPhoto) {
+      // Set contact photo path
+      const publicPath = `${Application.appRoot}/public/uploads`
+      await contactPhoto.move(publicPath)
+      contactData.photo = contactPhoto.fileName
+    }
+
+    await Contact.query().where('id', params.id).update({...contactData})
+
+    const addrData = request.only(
+      ['country', 'state', 'city', 'street', 'number', 'additional_info']
+    )
+
+    const {addressId} = await Contact.find(params.id)
+    await Address.query().where('id', addressId).update({...addrData})
+
+    return response.redirect('/contacts')
   }
 
   public async destroy ({}: HttpContextContract) {
+  }
+
+  private async validateRequest(req) {
+    return await req.validate({
+      schema: schema.create({
+        first_name: schema.string(),
+        last_name: schema.string(),
+        email: schema.string({}, [rules.email()]),
+      })
+    })
   }
 }

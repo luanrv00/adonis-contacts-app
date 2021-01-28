@@ -12,7 +12,8 @@ export default class ContactSeederSeeder extends BaseSeeder {
     const contact = await Contact.create({
       first_name: 'Soft',
       last_name: 'Makers',
-      email: 'Makers'
+      email: 'Makers',
+      phone: '81 99999-9999'
     })
 
     contact.related('address').associate(addr)

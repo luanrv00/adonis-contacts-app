@@ -15,4 +15,10 @@ describe('Contact Listing', () => {
     cy.visit('/contacts')
     cy.get('table').should('exist')
   })
+
+  it('displays a button to edit a contact', () => {
+    cy.exec('node ace db:seed')
+    cy.visit('/contacts')
+    cy.contains('Editar').should('exist')
+  })
 })

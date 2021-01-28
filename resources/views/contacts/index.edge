@@ -23,6 +23,7 @@
               <th>Cidade</th>
               <th>Av./Rua</th>
               <th>Nº</th>
+              <th>&nbsp;</th>
           </tr>
       </thead>
       <tbody>
@@ -31,7 +32,7 @@
           <td class="table-column">
             <figure class="image is-64x64">
               @if (contact.photo)
-              <img class="ui tiny avatar image" src="{{contact.photo}}">
+              <img class="ui tiny avatar image" src="/uploads/{{contact.photo}}">
               @endif
             </figure>
           </td>
@@ -43,6 +44,11 @@
           <td class="table-column">{{contact.address.city}}</td>
           <td class="table-column">{{contact.address.street}}</td>
           <td class="table-column">{{contact.address.number}}</td>
+          <td class="table-column">
+            <a class="ui mini blue button" href="{{route('contacts.edit', {params: {id: contact.id}})}}">
+              Editar
+            </a>
+          </td>
         </tr>
         @endeach
       </tbody>

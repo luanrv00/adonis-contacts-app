@@ -1,0 +1,79 @@
+@layout("layouts/base")
+@section("content")
+@include("layouts/error-flash-message")
+
+<form
+  class="ui form"
+  method="post"
+  action="{{route('contacts.update', {params: {id: contact.id}})}}?_method=put"
+  enctype="multipart/form-data">
+  {{csrfField()}}
+  <div class="two fields">
+      <div class="field">
+        <label>Nome <span class="required-field">*</span></label>
+        <input name="first_name" value="{{contact.firstName || ''}}">
+      </div>
+      <div class="field">
+        <label>Sobrenome <span class="required-field">*</span></label>
+        <input name="last_name" value="{{contact.lastName || ''}}">
+      </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>E-mail <span class="required-field">*</span></label>
+      <input type="email" name="email" value="{{contact.email || ''}}">
+    </div>
+    <div class="field">
+      <label>Telefone</label>
+      <input name="phone" value="{{contact.phone || ''}}">
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="field">
+      <label>Foto</label>
+      <input type="file" name="photo">
+    </div>
+  </div>
+
+  <hr class="ui divider">
+
+  <div class="three fields">
+    <div class="field">
+      <label>País</label>
+      <input name="country" value="{{contact.address.country || ''}}">
+    </div>
+    <div class="field">
+      <label>Estado</label>
+      <input name="state" value="{{contact.address.state || ''}}">
+    </div>
+    <div class="field">
+      <label>Cidade</label>
+      <input name="city" value="{{contact.address.city || ''}}">
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>Avenida/Rua</label>
+      <input name="street" value="{{contact.address.street || ''}}">
+    </div>
+    <div class="field">
+      <label>Nº</label>
+      <input name="number" value="{{contact.address.number || ''}}">
+    </div>
+  </div>
+  <div class="field">
+    <label>Complemento</label>
+    <textarea class="textarea" name="additional_info">
+      {{contact.address.additionalInfo || ''}}
+    </textarea>
+  </div>
+
+  <hr class="ui divider">
+
+  <div class="fields">
+    <button class="ui primary button" type="submit">Atualizar</button>
+    <a class="ui button" href="{{route('contacts.index')}}">Cancelar</a>
+  </div>
+</form>
+@endsection
