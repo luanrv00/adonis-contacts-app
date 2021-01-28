@@ -81,7 +81,11 @@ export default class ContactsController {
     return response.redirect('/contacts')
   }
 
-  public async destroy ({}: HttpContextContract) {
+  public async destroy ({params, view, response}: HttpContextContract) {
+    const contact = await Contact.find(params.id)
+    await contact.delete()
+
+    return response.redirect('/contacts')
   }
 
   private async validateRequest(req) {

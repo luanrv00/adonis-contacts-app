@@ -24,6 +24,7 @@
               <th>Av./Rua</th>
               <th>Nº</th>
               <th>&nbsp;</th>
+              <th>&nbsp;</th>
           </tr>
       </thead>
       <tbody>
@@ -48,6 +49,14 @@
             <a class="ui mini blue button" href="{{route('contacts.edit', {params: {id: contact.id}})}}">
               Editar
             </a>
+          </td>
+          <td class="table-column">
+            <form
+              method="post"
+              action="{{route('contacts.destroy', {params:{id: contact.id}})}}?_method=delete">
+              {{csrfField()}}
+              <input class="ui mini red button" type="submit" value="Remover">
+            </form>
           </td>
         </tr>
         @endeach
