@@ -10,7 +10,7 @@ Para iniciar o servidor de desenvolvimento, execute o seguinte comando no termin
 sh scripts/serve
 ```
 
-A aplicação deverá estar disponível em [http://localhost:3333](http://localhost:3333)
+A aplicação deverá estar disponível em [http://localhost:8000](http://localhost:8000)
 
 ## Testes
 
